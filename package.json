@@ -1,7 +1,7 @@
 {
-  "name": "copecart-webhook",
+  "name": "wasabi-tracking",
   "version": "1.0.0",
-  "description": "CopeCart IPN webhook receiver that forwards events to Traffic Manager postback",
+  "description": "Tracking webhook service for WasabiZone Traffic Manager",
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",

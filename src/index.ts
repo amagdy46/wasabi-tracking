@@ -21,5 +21,5 @@ app.get("/health", (_req, res) => {
 });
 
 app.listen(config.PORT, () => {
-  logger.info(`CopeCart webhook service listening on port ${config.PORT}`);
+  logger.info(`Wasabi tracking service listening on port ${config.PORT}`);
 });
