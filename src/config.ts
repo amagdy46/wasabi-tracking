@@ -3,9 +3,9 @@ import { z } from "zod";
 
 const envSchema = z.object({
   PORT: z.coerce.number().default(3000),
-  COPECART_IPN_SECRET: z.string().min(1),
-  TM_POSTBACK_BASE_URL: z.string().url(),
-  TM_POSTBACK_KEY: z.string().min(1),
+  COPECART_IPN_SECRET: z.string().default(""),
+  TM_POSTBACK_BASE_URL: z.string().url().default("https://postback.wasabizone.com/"),
+  TM_POSTBACK_KEY: z.string().default(""),
   CLICK_ID_FIELD: z.string().default("metadata"),
   AMOUNT_FIELD: z
     .enum(["transaction_amount", "earned_amount", "transaction_earned_amount"])
