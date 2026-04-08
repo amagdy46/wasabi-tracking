@@ -1,9 +1,20 @@
-import type { CopecartEventType, CopecartIpnPayload } from "../types/copecart.js";
+import type {
+  CopecartEventType,
+  CopecartIpnPayload,
+} from "../types/copecart.js";
 import { config } from "../config.js";
 
 export interface MappedEvent {
   forward: boolean;
-  type: "sale" | "trial" | "refund" | "chargeback" | "cancelled" | "upcoming" | "failed" | "pending";
+  type:
+    | "purchase"
+    | "trial"
+    | "refund"
+    | "chargeback"
+    | "cancelled"
+    | "upcoming"
+    | "failed"
+    | "pending";
   clickId: string | null;
   amount: number;
   currency: string;
@@ -22,14 +33,18 @@ interface EventAction {
 }
 
 const EVENT_CONFIG: Record<CopecartEventType, EventAction> = {
-  "payment.made":                { forward: true,  type: "sale" },
-  "payment.trial":               { forward: true,  type: "trial" },
-  "payment.refunded":            { forward: true,  type: "refund",     negateAmount: true },
-  "payment.charged_back":        { forward: true,  type: "chargeback", negateAmount: true },
-  "payment.failed":              { forward: false, type: "failed" },
-  "payment.pending":             { forward: false, type: "pending" },
+  "payment.made": { forward: true, type: "purchase" },
+  "payment.trial": { forward: true, type: "trial" },
+  "payment.refunded": { forward: true, type: "refund", negateAmount: true },
+  "payment.charged_back": {
+    forward: true,
+    type: "chargeback",
+    negateAmount: true,
+  },
+  "payment.failed": { forward: false, type: "failed" },
+  "payment.pending": { forward: false, type: "pending" },
   "payment.recurring.cancelled": { forward: false, type: "cancelled" },
-  "payment.recurring.upcoming":  { forward: false, type: "upcoming" },
+  "payment.recurring.upcoming": { forward: false, type: "upcoming" },
 };
 
 function extractClickId(payload: CopecartIpnPayload): string | null {

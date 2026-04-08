@@ -44,7 +44,11 @@ export const CopecartPaymentStatus = z.enum([
   "test_successed_refunded",
 ]);
 
-export const CopecartTransactionType = z.enum(["sale", "refund", "chargeback"]);
+export const CopecartTransactionType = z.enum([
+  "purchase",
+  "refund",
+  "chargeback",
+]);
 
 export const CopecartProductType = z.enum([
   "digital",
@@ -120,7 +124,9 @@ export const CopecartIpnPayload = z.object({
   buyer_subscribed_for_newsletter: z.boolean().optional(),
   line_item_amount: z.number().optional(),
   line_item_vat_amount: z.number().optional(),
-  transaction_amount_per_product: z.array(TransactionAmountPerProduct).optional(),
+  transaction_amount_per_product: z
+    .array(TransactionAmountPerProduct)
+    .optional(),
   transaction_vat_amount: z.number().optional(),
   product_internal_name: z.string().nullable().optional(),
   metadata: z.string().nullable().optional(),

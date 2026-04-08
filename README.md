@@ -10,7 +10,7 @@ Receives CopeCart IPN events (v1.6.7), verifies HMAC-SHA256 signature, and maps 
 
 | CopeCart Event                 | Action             | Forwards? |
 |-------------------------------|--------------------|-----------|
-| `payment.made`                | sale               | Yes       |
+| `payment.made`                | purchase               | Yes       |
 | `payment.trial`               | trial              | Yes       |
 | `payment.refunded`            | refund (neg $)     | Yes       |
 | `payment.charged_back`        | chargeback (neg $) | Yes       |
