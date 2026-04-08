@@ -6,6 +6,7 @@ function buildPostbackUrl(event: MappedEvent): string {
   const base = config.TM_POSTBACK_BASE_URL.replace(/\/+$/, "");
   const params = new URLSearchParams({
     clickid: event.clickId ?? "",
+    event: event.type,
     amount: String(event.amount),
     currency: event.currency,
     transaction_id: event.transactionId,
