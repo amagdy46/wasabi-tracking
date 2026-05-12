@@ -9,8 +9,10 @@ function shouldLog(level: Level): boolean {
 }
 
 function fmt(level: Level, message: string, data?: Record<string, unknown>): string {
+  // Bracket the timestamp so log viewers (Coolify, Docker -t) don't strip a
+  // bare leading ISO string into their own timestamp column.
   const ts = new Date().toISOString();
-  const base = `${ts} [${level.toUpperCase()}] ${message}`;
+  const base = `[${ts}] [${level.toUpperCase()}] ${message}`;
   return data ? `${base} ${JSON.stringify(data)}` : base;
 }
 

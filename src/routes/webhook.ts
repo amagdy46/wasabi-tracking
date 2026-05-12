@@ -8,11 +8,14 @@ import { logger } from "../utils/logger.js";
 export const webhookRouter = Router();
 
 webhookRouter.post("/webhook/copecart", verifySignature, async (req: Request, res: Response) => {
+  logger.info("Incoming CopeCart IPN", { payload: req.body });
+
   const parsed = CopecartIpnPayload.safeParse(req.body);
 
   if (!parsed.success) {
     logger.warn("Invalid IPN payload", {
       errors: parsed.error.flatten().fieldErrors,
+      payload: req.body,
     });
     res.status(400).send("Invalid payload");
     return;
