@@ -7,7 +7,7 @@ import { config } from "../config.js";
 export interface MappedEvent {
   forward: boolean;
   type:
-    | "purchase"
+    | "payment"
     | "trial"
     | "refund"
     | "chargeback"
@@ -33,7 +33,7 @@ interface EventAction {
 }
 
 const EVENT_CONFIG: Record<CopecartEventType, EventAction> = {
-  "payment.made": { forward: true, type: "purchase" },
+  "payment.made": { forward: true, type: "payment" },
   "payment.trial": { forward: true, type: "trial" },
   "payment.refunded": { forward: true, type: "refund", negateAmount: true },
   "payment.charged_back": {
